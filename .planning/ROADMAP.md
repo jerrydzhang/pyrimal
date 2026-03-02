@@ -12,7 +12,7 @@ This roadmap delivers correct tree simplification (preserving level set topology
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Tree Simplification Fix** - Position-aware simplification preserving level set topology
+- [x] **Phase 1: Tree Simplification Fix** - Position-aware simplification preserving level set topology (completed 2026-03-02)
 - [ ] **Phase 2: PhySO Adapter** - PhySO integration with induced KL divergence reward
 
 ## Phase Details
@@ -30,8 +30,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Position-aware simplification with depth tracking (SIMP-01, SIMP-02, SIMP-05, SIMP-06, TEST-01, TEST-02)
-- [ ] 01-02: Property-based testing with Hypothesis (SIMP-04)
+- [x] 01-01: Position-aware simplification with depth tracking (SIMP-01, SIMP-02, SIMP-05, SIMP-06, TEST-01, TEST-02)
+- [x] 01-02: Property-based testing with Hypothesis (SIMP-04)
 
 ### Phase 2: PhySO Adapter
 **Goal**: PhySO can use induced KL divergence as its reward signal for symbolic regression
@@ -55,7 +55,7 @@ Phases execute in numeric order: 1 → 2
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Tree Simplification Fix | 0/2 | Planned | - |
+| 1. Tree Simplification Fix | 2/2 | Complete | 2026-03-02 |
 | 2. PhySO Adapter | 0/2 | Not started | - |
 
 ---

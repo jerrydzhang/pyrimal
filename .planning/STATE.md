@@ -40,7 +40,7 @@ Recent decisions affecting current work:
 - Testing: Hypothesis for property-based testing to verify level set preservation
 - [Phase 01-tree-simplification-fix]: Constants and monotonic ops only removed at root (depth == 0) — Removing nested constants/monotonic ops changes where expressions equal zero, breaking level set topology for early stopping detection
 - [Phase 01-tree-simplification-fix]: Removed x + x rule and trig/square sampling checks — x + x not level-set preserving; trig/square sampling fragile and data-dependent per research
-- [Phase 01-tree-simplification-fix]: Level set preservation means where f(x)≈0, simplify(f)(x)≈0 — Zero locations must be preserved, not output values; extra zeros OK (conservative for early stopping)
+- [Phase 01-tree-simplification-fix]: Level set preservation means if f(x1)==f(x2), then simplify(f)(x1)==simplify(f)(x2) — Equivalence classes preserved; NaN→real values acceptable (domain extension)
 
 ### Pending Todos
 
