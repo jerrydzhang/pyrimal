@@ -1,0 +1,7 @@
+name: gplearn
+description: gplearn parameters search
+shared:
+  module: experiments.gplearn_experiment
+  random_state: 42
+  parameters:
+    n_trials: 30
