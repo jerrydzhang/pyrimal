@@ -55,7 +55,7 @@ Phases execute in numeric order: 1 → 2
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Tree Simplification Fix | 0/3 | Not started | - |
+| 1. Tree Simplification Fix | 0/2 | Planned | - |
 | 2. PhySO Adapter | 0/2 | Not started | - |
 
 ---
