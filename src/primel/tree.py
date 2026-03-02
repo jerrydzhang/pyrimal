@@ -179,102 +179,101 @@ def simplify_tree(tree: ExpressionTree, X: np.ndarray) -> None:
     constant offset). This is done by removing operations that don't change the
     topology of the zero set.
 
-    The simplification rules preserve level curves by:
-    - Removing monotonic transformations that preserve zeros (log, sqrt, square when non-negative)
-    - Removing additive/multiplicative constants (add/sub/mul/div with constants)
-    - Simplifying redundant operations (x op x -> simpler form)
-    
-    Works top-down to ensure parent context is considered when simplifying children.
+    Position-aware simplification ensures that certain rules only apply at the
+    root level to preserve level set topology correctly:
+
+    - Constants (+c, *c) only removed at root/output edge (depth == 0)
+    - Monotonic ops (log, sqrt, exp) only removed at root level (depth == 0)
+    - Identity rules (x-x, x/x, *1, /1, +0, -0) work at any depth
+
+    Works recursively with depth tracking to ensure correct simplification.
     """
 
-    def _simplify_at_index(index: int) -> bool:
+    def _simplify_subtree(index: int, depth: int) -> tuple[bool, int]:
         """
-        Attempts to simplify at the given index. Returns True if a simplification
-        was made (requiring restart), False otherwise.
+        Recursively simplifies a subtree starting at the given index.
+
+        Args:
+            index: The node index to start simplification from
+            depth: Depth from root (0 for root, increments for nested nodes)
+
+        Returns:
+            tuple[bool, int]: (changed, next_index)
+                - changed: True if a simplification was made (requiring restart)
+                - next_index: The index of the next sibling node
         """
         if index >= len(tree.nodes):
-            return False
-            
+            return False, index
+
         node = tree.nodes[index]
 
+        # Try simplification at current node with depth check
         if node.arity == 1:
             # Unary operations: remove if they're monotonic and preserve zeros
-            # log(x), sqrt(x), exp(x): monotonic, preserve level curve topology
-            # Julia removes these unconditionally (Simplify.jl line 35)
-            if node.name in {"log", "sqrt", "exp"}:
+            # ONLY at root level (depth == 0) to preserve level set topology
+            if depth == 0 and node.name in {"log", "sqrt", "exp"}:
                 tree.replace_node_with_child(index, 0)
-                return True
-            elif node.name in {"sin", "cos", "tan"}:
-                # Only remove if range is small enough that function is monotonic
-                result = tree.evaluate(X, index + 1)
-                if np.abs(result.max() - result.min()) < 2 * np.pi:
-                    tree.replace_node_with_child(index, 0)
-                    return True
-            elif node.name == "square":
-                # x^2 is monotonic when x >= 0, preserves zero
-                result = tree.evaluate(X, index + 1)
-                if (result >= 0).all():
-                    tree.replace_node_with_child(index, 0)
-                    return True
+                return True, 0  # Signal restart from root
 
         elif node.arity == 2:
             if node.name not in {"add", "sub", "mul", "div"}:
-                return False
+                pass  # Continue to children
+            else:
+                left_index = index + 1
+                right_index = index + 1 + tree._subtree_size(index + 1)
 
-            left_index = index + 1
-            right_index = index + 1 + tree._subtree_size(index + 1)
-            
-            if right_index >= len(tree.nodes):
-                return False
-                
-            left = tree.nodes[left_index]
-            right = tree.nodes[right_index]
+                if right_index < len(tree.nodes):
+                    left = tree.nodes[left_index]
+                    right = tree.nodes[right_index]
 
-            # Addition/subtraction with constant: doesn't change zero set (just shifts)
-            if node.name in {"add", "sub"}:
-                if left.arity == 0 and isinstance(left.value, (int, float)):
-                    tree.replace_node_with_child(index, 1)
-                    return True
-                elif right.arity == 0 and isinstance(right.value, (int, float)):
-                    tree.replace_node_with_child(index, 0)
-                    return True
-            
-            # Multiplication/division by constant: doesn't change zero set
-            elif node.name in {"mul", "div"}:
-                if left.arity == 0 and isinstance(left.value, (int, float)):
-                    if left.value != 0:  # Avoid div by zero or mul by zero
-                        tree.replace_node_with_child(index, 1)
-                        return True
-                elif right.arity == 0 and isinstance(right.value, (int, float)):
-                    if right.value != 0:
-                        tree.replace_node_with_child(index, 0)
-                        return True
-            
-            # Identical subtrees
-            if tree._is_subtree_equal(left_index, right_index):
-                if node.name == "sub":  # x - x = 0
-                    tree.replace_subtree(index, "constant", 0.0, 0)
-                    return True
-                elif node.name == "div":  # x / x = 1
-                    tree.replace_subtree(index, "constant", 1.0, 0)
-                    return True
-                elif node.name == "add":  # x + x doesn't change zeros, simplify to x
-                    tree.replace_node_with_child(index, 0)
-                    return True
-                elif node.name == "mul":  # x * x doesn't change zeros if x >= 0
-                    result = tree.evaluate(X, left_index)
-                    if (result >= 0).all():
-                        tree.replace_node_with_child(index, 0)
-                        return True
+                    # Addition/subtraction with constant: doesn't change zero set (just shifts)
+                    # ONLY at root level (depth == 0) to preserve level set topology
+                    if depth == 0 and node.name in {"add", "sub"}:
+                        if left.arity == 0 and isinstance(left.value, (int, float)):
+                            tree.replace_node_with_child(index, 1)
+                            return True, 0  # Signal restart from root
+                        elif right.arity == 0 and isinstance(right.value, (int, float)):
+                            tree.replace_node_with_child(index, 0)
+                            return True, 0  # Signal restart from root
 
-        return False
+                    # Multiplication/division by constant: doesn't change zero set
+                    # ONLY at root level (depth == 0) to preserve level set topology
+                    elif depth == 0 and node.name in {"mul", "div"}:
+                        if left.arity == 0 and isinstance(left.value, (int, float)):
+                            if left.value != 0:  # Avoid div by zero or mul by zero
+                                tree.replace_node_with_child(index, 1)
+                                return True, 0  # Signal restart from root
+                        elif right.arity == 0 and isinstance(right.value, (int, float)):
+                            if right.value != 0:
+                                tree.replace_node_with_child(index, 0)
+                                return True, 0  # Signal restart from root
 
-    # Traverse top-down, restart whenever a simplification is made
-    index = 0
-    while index < len(tree.nodes):
-        if _simplify_at_index(index):
-            # Simplification was made, restart from the beginning
-            index = 0
-        else:
-            # No simplification, move to next node
-            index += 1
+                    # Identical subtrees: identity rules work at any depth
+                    if tree._is_subtree_equal(left_index, right_index):
+                        if node.name == "sub":  # x - x = 0
+                            tree.replace_subtree(index, "constant", 0.0, 0)
+                            return True, 0  # Signal restart from root
+                        elif node.name == "div":  # x / x = 1
+                            tree.replace_subtree(index, "constant", 1.0, 0)
+                            return True, 0  # Signal restart from root
+                        elif node.name == "mul":  # x * x doesn't change zeros if x >= 0
+                            result = tree.evaluate(X, left_index)
+                            if (result >= 0).all():
+                                tree.replace_node_with_child(index, 0)
+                                return True, 0  # Signal restart from root
+
+        # Recurse into children with incremented depth
+        child_index = index + 1
+        for _ in range(node.arity):
+            changed, next_idx = _simplify_subtree(child_index, depth + 1)
+            if changed:
+                return True, 0  # Signal restart from root
+            child_index = next_idx
+
+        return False, index + tree._subtree_size(index)
+
+    # Traverse recursively, restart whenever a simplification is made
+    while True:
+        changed, _ = _simplify_subtree(0, 0)
+        if not changed:
+            break
