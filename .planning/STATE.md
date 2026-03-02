@@ -27,14 +27,7 @@ Progress: [░░░░░░░░░░] 0%
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 1. Tree Simplification Fix | 0/2 | - | - |
-| 2. PhySO Adapter | 0/2 | - | - |
-
-**Recent Trend:**
-- Last 5 plans: None yet
-- Trend: -
-
-*Updated after each plan completion*
+| Phase 01-tree-simplification-fix P01 | 4 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -45,6 +38,8 @@ Recent decisions affecting current work:
 
 - Roadmap: Simplification first approach - broken simplification blocks PhySO work
 - Testing: Hypothesis for property-based testing to verify level set preservation
+- [Phase 01-tree-simplification-fix]: Constants and monotonic ops only removed at root (depth == 0) — Removing nested constants/monotonic ops changes where expressions equal zero, breaking level set topology for early stopping detection
+- [Phase 01-tree-simplification-fix]: Removed x + x rule and trig/square sampling checks — x + x not level-set preserving; trig/square sampling fragile and data-dependent per research
 
 ### Pending Todos
 

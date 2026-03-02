@@ -7,12 +7,12 @@
 
 ### Tree Simplification
 
-- [ ] **SIMP-01**: Position-aware constant removal — only remove `+c`, `*c` at root/output edge
-- [ ] **SIMP-02**: Position-aware monotonic removal — only remove log/sqrt/exp at root level
-- [ ] **SIMP-03**: Basic identity rules preserved — `*1`, `/1`, `+0`, `-0` removal still works
+- [x] **SIMP-01**: Position-aware constant removal — only remove `+c`, `*c` at root/output edge
+- [x] **SIMP-02**: Position-aware monotonic removal — only remove log/sqrt/exp at root level
+- [x] **SIMP-03**: Basic identity rules preserved — `*1`, `/1`, `+0`, `-0` removal still works
 - [ ] **SIMP-04**: Property-based tests with Hypothesis proving level set preservation
-- [ ] **SIMP-05**: Remove or fix `x + x → x` rule (NOT level-set preserving)
-- [ ] **SIMP-06**: Fix sampling-based monotonicity checks (fragile, data-dependent)
+- [x] **SIMP-05**: Remove or fix `x + x → x` rule (NOT level-set preserving)
+- [x] **SIMP-06**: Fix sampling-based monotonicity checks (fragile, data-dependent)
 
 ### PhySO Adapter
 
@@ -24,8 +24,8 @@
 
 ### Testing
 
-- [ ] **TEST-01**: Unit tests for position-aware constant removal
-- [ ] **TEST-02**: Unit tests for position-aware monotonic removal
+- [x] **TEST-01**: Unit tests for position-aware constant removal
+- [x] **TEST-02**: Unit tests for position-aware monotonic removal
 - [ ] **TEST-03**: Unit tests for PhySO adapter fitness computation
 - [ ] **TEST-04**: Local validation script in place of full integration tests
 
@@ -64,14 +64,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SIMP-01 | Phase 1: Tree Simplification Fix | Pending |
-| SIMP-02 | Phase 1: Tree Simplification Fix | Pending |
-| SIMP-03 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-01 | Phase 1: Tree Simplification Fix | Complete |
+| SIMP-02 | Phase 1: Tree Simplification Fix | Complete |
+| SIMP-03 | Phase 1: Tree Simplification Fix | Complete |
 | SIMP-04 | Phase 1: Tree Simplification Fix | Pending |
-| SIMP-05 | Phase 1: Tree Simplification Fix | Pending |
-| SIMP-06 | Phase 1: Tree Simplification Fix | Pending |
-| TEST-01 | Phase 1: Tree Simplification Fix | Pending |
-| TEST-02 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-05 | Phase 1: Tree Simplification Fix | Complete |
+| SIMP-06 | Phase 1: Tree Simplification Fix | Complete |
+| TEST-01 | Phase 1: Tree Simplification Fix | Complete |
+| TEST-02 | Phase 1: Tree Simplification Fix | Complete |
 | PHYS-01 | Phase 2: PhySO Adapter | Pending |
 | PHYS-02 | Phase 2: PhySO Adapter | Pending |
 | PHYS-03 | Phase 2: PhySO Adapter | Pending |
