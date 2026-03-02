@@ -27,12 +27,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Basic identity rules (`*1`, `/1`, `+0`, `-0`) still work everywhere
   4. Property-based tests (Hypothesis) prove level set preservation across random expression trees
   5. `x + x → x` rule removed or fixed (NOT level-set preserving)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Implement position-aware constant removal
-- [ ] 01-02: Implement position-aware monotonic removal
-- [ ] 01-03: Add property-based tests for level set preservation
+- [ ] 01-01: Position-aware simplification with depth tracking (SIMP-01, SIMP-02, SIMP-05, SIMP-06, TEST-01, TEST-02)
+- [ ] 01-02: Property-based testing with Hypothesis (SIMP-04)
 
 ### Phase 2: PhySO Adapter
 **Goal**: PhySO can use induced KL divergence as its reward signal for symbolic regression
