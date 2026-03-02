@@ -10,7 +10,7 @@
 - [x] **SIMP-01**: Position-aware constant removal — only remove `+c`, `*c` at root/output edge
 - [x] **SIMP-02**: Position-aware monotonic removal — only remove log/sqrt/exp at root level
 - [x] **SIMP-03**: Basic identity rules preserved — `*1`, `/1`, `+0`, `-0` removal still works
-- [ ] **SIMP-04**: Property-based tests with Hypothesis proving level set preservation
+- [x] **SIMP-04**: Property-based tests with Hypothesis proving level set preservation
 - [x] **SIMP-05**: Remove or fix `x + x → x` rule (NOT level-set preserving)
 - [x] **SIMP-06**: Fix sampling-based monotonicity checks (fragile, data-dependent)
 
@@ -67,7 +67,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SIMP-01 | Phase 1: Tree Simplification Fix | Complete |
 | SIMP-02 | Phase 1: Tree Simplification Fix | Complete |
 | SIMP-03 | Phase 1: Tree Simplification Fix | Complete |
-| SIMP-04 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-04 | Phase 1: Tree Simplification Fix | Complete |
 | SIMP-05 | Phase 1: Tree Simplification Fix | Complete |
 | SIMP-06 | Phase 1: Tree Simplification Fix | Complete |
 | TEST-01 | Phase 1: Tree Simplification Fix | Complete |
