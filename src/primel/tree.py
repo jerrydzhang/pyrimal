@@ -144,7 +144,7 @@ class ExpressionTree:
                     child_values.append(child_val)
                     child_index += child_size
                     size += child_size
-                with np.errstate(invalid='ignore', divide='ignore'):
+                with np.errstate(invalid="ignore", divide="ignore"):
                     return node.value(*child_values), size
 
         val, _ = _eval(index)
@@ -171,6 +171,11 @@ class ExpressionTree:
                 return False
 
         return True
+
+    def copy(self: Self) -> Self:
+        """Create a deep copy of the tree for comparison in tests."""
+        copied_nodes = [Node(n.name, n.value, n.arity, n.repr_func) for n in self.nodes]
+        return ExpressionTree.init_from_list(copied_nodes)
 
 
 def simplify_tree(tree: ExpressionTree, X: np.ndarray) -> None:

@@ -17,18 +17,13 @@ dependencies = [
 [project.optional-dependencies]
 gplearn = ["gplearn>=0.4.2"]
 
-adapters = [
-	"primel[gplearn]",
+physo = [
+	"physo>=1.1.11",
 ]
 
-dev = [
-    "jupyterlab>=4.4.9",
-    "jupyterlab-lsp>=5.2.0",
-    "jupyterlab-vim>=4.1.4",
-    "notebook-intelligence>=2.4.2",
-    "pytest>=8.4.2",
-    "python-lsp-server>=1.13.1",
-    "ruff>=0.13.0",
+adapters = [
+	"primel[gplearn]",
+	"primel[physo]",
 ]
 
 [tool.uv.sources]
@@ -36,5 +31,9 @@ jernerics = { git = "https://github.com/jerrydzhang/jernerics.git" }
 
 [dependency-groups]
 dev = [
-    "ty>=0.0.19",
+	"ty>=0.0.19",
+	"pytest>=8.4.2",
+	"python-lsp-server>=1.13.1",
+	"ruff>=0.13.0",
+	"hypothesis>=6.151.9",
 ]
