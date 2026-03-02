@@ -134,7 +134,7 @@ class ExpressionTree:
                 if callable(node.value):
                     val = node.value(X)
                 else:
-                    val = np.full(X.shape[0], node.value)
+                    val = np.full(X.shape, node.value)
                 return val, size
             else:
                 child_values = []
@@ -169,6 +169,19 @@ class ExpressionTree:
             n2 = self.nodes[index2 + offset]
             if n1.name != n2.name or n1.arity != n2.arity:
                 return False
+            # For leaf nodes with non-callable values, compare the values
+            # (e.g., const(5) != const(6))
+            # For callable values, we only compare by name (same name = same function)
+            if n1.arity == 0 and not callable(n1.value) and not callable(n2.value):
+                if n1.value != n2.value:
+                    # Handle NaN comparison
+                    if not (
+                        isinstance(n1.value, float)
+                        and isinstance(n2.value, float)
+                        and np.isnan(n1.value)
+                        and np.isnan(n2.value)
+                    ):
+                        return False
 
         return True
 
@@ -180,7 +193,7 @@ class ExpressionTree:
 
 def simplify_tree(tree: ExpressionTree, X: np.ndarray) -> None:
     """
-    Simplifies the expression tree while preserving level curves (zero sets up to
+    Simplifies expression tree while preserving level curves (zero sets up to
     constant offset). This is done by removing operations that don't change the
     topology of the zero set.
 
@@ -188,8 +201,9 @@ def simplify_tree(tree: ExpressionTree, X: np.ndarray) -> None:
     root level to preserve level set topology correctly:
 
     - Constants (+c, *c) only removed at root/output edge (depth == 0)
-    - Monotonic ops (log, sqrt, exp) only removed at root level (depth == 0)
-    - Identity rules (x-x, x/x, *1, /1, +0, -0) work at any depth
+    - Identity rules (x-x, x/x) work at any depth
+    - sqrt(x) → x only at root level (both have zero at x=0)
+    - log(x) and exp(x) NOT removed (change zero locations)
 
     Works recursively with depth tracking to ensure correct simplification.
     """
@@ -214,9 +228,9 @@ def simplify_tree(tree: ExpressionTree, X: np.ndarray) -> None:
 
         # Try simplification at current node with depth check
         if node.arity == 1:
-            # Unary operations: remove if they're monotonic and preserve zeros
-            # ONLY at root level (depth == 0) to preserve level set topology
-            if depth == 0 and node.name in {"log", "sqrt", "exp"}:
+            # Unary operations: sqrt(x) → x only at root level (preserves zero at x=0)
+            # log and exp NOT removed (change zero locations)
+            if depth == 0 and node.name == "sqrt":
                 tree.replace_node_with_child(index, 0)
                 return True, 0  # Signal restart from root
 
@@ -230,6 +244,21 @@ def simplify_tree(tree: ExpressionTree, X: np.ndarray) -> None:
                 if right_index < len(tree.nodes):
                     left = tree.nodes[left_index]
                     right = tree.nodes[right_index]
+
+                    # Identical subtrees: identity rules work at any depth
+                    # Check these FIRST before constant removal rules
+                    if tree._is_subtree_equal(left_index, right_index):
+                        if node.name == "sub":  # x - x = 0
+                            tree.replace_subtree(index, "constant", 0.0, 0)
+                            return True, 0  # Signal restart from root
+                        elif node.name == "div":  # x / x = 1
+                            tree.replace_subtree(index, "constant", 1.0, 0)
+                            return True, 0  # Signal restart from root
+                        elif node.name == "mul":  # x * x doesn't change zeros if x >= 0
+                            result = tree.evaluate(X, left_index)
+                            if (result >= 0).all():
+                                tree.replace_node_with_child(index, 0)
+                                return True, 0  # Signal restart from root
 
                     # Addition/subtraction with constant: doesn't change zero set (just shifts)
                     # ONLY at root level (depth == 0) to preserve level set topology
@@ -250,20 +279,6 @@ def simplify_tree(tree: ExpressionTree, X: np.ndarray) -> None:
                                 return True, 0  # Signal restart from root
                         elif right.arity == 0 and isinstance(right.value, (int, float)):
                             if right.value != 0:
-                                tree.replace_node_with_child(index, 0)
-                                return True, 0  # Signal restart from root
-
-                    # Identical subtrees: identity rules work at any depth
-                    if tree._is_subtree_equal(left_index, right_index):
-                        if node.name == "sub":  # x - x = 0
-                            tree.replace_subtree(index, "constant", 0.0, 0)
-                            return True, 0  # Signal restart from root
-                        elif node.name == "div":  # x / x = 1
-                            tree.replace_subtree(index, "constant", 1.0, 0)
-                            return True, 0  # Signal restart from root
-                        elif node.name == "mul":  # x * x doesn't change zeros if x >= 0
-                            result = tree.evaluate(X, left_index)
-                            if (result >= 0).all():
                                 tree.replace_node_with_child(index, 0)
                                 return True, 0  # Signal restart from root
 

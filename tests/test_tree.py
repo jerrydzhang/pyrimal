@@ -38,8 +38,15 @@ leaves = st.one_of(
         st.builds(lambda: make_x_node()),
         st.builds(
             lambda v: make_const_node(v),
-            st.floats(
-                min_value=-10, max_value=10, allow_nan=False, allow_infinity=False
+            # Exclude values too close to zero to avoid false "near-zero" detection
+            # Values like 1e-100 make outputs "near zero" but aren't actual zeros
+            st.one_of(
+                st.floats(
+                    min_value=-10, max_value=-0.1, allow_nan=False, allow_infinity=False
+                ),
+                st.floats(
+                    min_value=0.1, max_value=10, allow_nan=False, allow_infinity=False
+                ),
             ),
         ),
     ]
@@ -183,24 +190,26 @@ class TestSimplifyTree:
     """Tests for the heuristic simplification rules."""
 
     def test_simplify_log(self, pos_data):
-        """Test rule: log(x) -> x (at root level only)"""
+        """Test rule: log(x) does NOT simplify (changes zero locations)"""
         tree = ExpressionTree("log", np.log, 1)
         tree.add_node("x", lambda x: x, 0)
 
         simplify_tree(tree, pos_data)
 
-        assert len(tree.nodes) == 1
-        assert tree.nodes[0].name == "x"
+        # log(x) should NOT simplify (log(1)=0, but x=1≠0)
+        assert len(tree.nodes) == 2
+        assert tree.nodes[0].name == "log"
 
     def test_simplify_exp(self, pos_data):
-        """Test rule: exp(x) -> x (at root level only)"""
+        """Test rule: exp(x) does NOT simplify (changes zero locations)"""
         tree = ExpressionTree("exp", np.exp, 1)
         tree.add_node("x", lambda x: x, 0)
 
         simplify_tree(tree, pos_data)
 
-        assert len(tree.nodes) == 1
-        assert tree.nodes[0].name == "x"
+        # exp(x) should NOT simplify (exp(-inf)=0, but x=-inf≠0)
+        assert len(tree.nodes) == 2
+        assert tree.nodes[0].name == "exp"
 
     def test_simplify_trig_not_removed(self, pos_data):
         """Test rule: trig functions should NOT be removed (sampling-based checks removed)."""
@@ -327,24 +336,24 @@ class TestSimplifyTree:
         assert tree.nodes[3].value == 3.0
 
     def test_monotonic_removal_at_root(self, pos_data):
-        """TEST-02: Monotonic ops (log, sqrt, exp) only removed at root level."""
-        # log(x) at root should simplify to x
+        """TEST-02: sqrt(x) only removed at root level; log/exp NOT removed."""
+        # log(x) at root should NOT simplify (changes zero locations)
         tree = ExpressionTree("log", np.log, 1)
         tree.add_node("x", lambda x: x, 0)
 
         simplify_tree(tree, pos_data)
 
-        assert len(tree.nodes) == 1
-        assert tree.nodes[0].name == "x"
+        assert len(tree.nodes) == 2
+        assert tree.nodes[0].name == "log"
 
-        # exp(x) at root should simplify to x
+        # exp(x) at root should NOT simplify (changes zero locations)
         tree = ExpressionTree("exp", np.exp, 1)
         tree.add_node("x", lambda x: x, 0)
 
         simplify_tree(tree, pos_data)
 
-        assert len(tree.nodes) == 1
-        assert tree.nodes[0].name == "x"
+        assert len(tree.nodes) == 2
+        assert tree.nodes[0].name == "exp"
 
         # sqrt(x) at root should simplify to x (pos_data is positive)
         tree = ExpressionTree("sqrt", np.sqrt, 1)
@@ -356,31 +365,18 @@ class TestSimplifyTree:
         assert tree.nodes[0].name == "x"
 
     def test_monotonic_removal_nested(self, pos_data):
-        """TEST-02: Nested monotonic ops should NOT be removed."""
-        # sin(log(x)) - sin has no removal rule (trig sampling removed)
-        # log is at depth 1, so log removal doesn't apply
-        tree = ExpressionTree("sin", np.sin, 1)
-        tree.add_node("log", np.log, 1)
-        tree.add_node("x", lambda x: x, 0)
-
-        simplify_tree(tree, pos_data)
-
-        # sin has no rule, log at depth 1 doesn't get removed
-        assert len(tree.nodes) == 3
-        assert tree.nodes[0].name == "sin"
-        assert tree.nodes[1].name == "log"
-
-        # cos(sqrt(x)) - cos has no removal rule (trig sampling removed)
+        """TEST-02: Nested sqrt should NOT be removed."""
+        # sin(sqrt(x)) - sin has no removal rule (trig sampling removed)
         # sqrt is at depth 1, so sqrt removal doesn't apply
-        tree = ExpressionTree("cos", np.cos, 1)
+        tree = ExpressionTree("sin", np.sin, 1)
         tree.add_node("sqrt", np.sqrt, 1)
         tree.add_node("x", lambda x: x, 0)
 
         simplify_tree(tree, pos_data)
 
-        # cos has no rule, sqrt at depth 1 doesn't get removed
+        # sin has no rule, sqrt at depth 1 doesn't get removed
         assert len(tree.nodes) == 3
-        assert tree.nodes[0].name == "cos"
+        assert tree.nodes[0].name == "sin"
         assert tree.nodes[1].name == "sqrt"
 
     def test_identity_rules_at_any_depth(self, pos_data):
@@ -606,3 +602,65 @@ class TestSimplifyTree:
         simplify_tree(tree, pos_data)
         assert len(tree.nodes) == 3
         assert tree.nodes[0].name == "add"
+
+
+class TestLevelSetPreservation:
+    """Property-based tests proving simplify preserves level set topology."""
+
+    @given(tree=expression_trees(max_leaves=15))
+    @settings(max_examples=200, deadline=None)
+    def test_simplify_preserves_zeros(self, tree):
+        """Core property: simplify(f)(x) == 0 ⟺ f(x) == 0
+
+        Level set preservation means the SHAPE of level sets is preserved.
+        If original f(x) = 0 at certain x values, the simplified function
+        must ALSO = 0 at those same x values. This is NOT about preserving
+        output values - it's about preserving WHERE zeros occur.
+
+        Note: NaN locations may change (e.g., sqrt(log(x)) -> log(x) changes
+        NaN to negative values for 0<x<1), but zero locations must be preserved.
+
+        For early stopping, we need: if original has zero at x, simplified
+        must also have zero at x (conservative - extra zeros are OK).
+        """
+        X = np.linspace(-5, 5, 50).reshape(-1, 1)
+
+        original_tree = tree.copy()
+        with np.errstate(invalid="ignore", divide="ignore"):
+            original = original_tree.evaluate(X).ravel()
+
+        simplify_tree(tree, X)
+
+        with np.errstate(invalid="ignore", divide="ignore"):
+            simplified = tree.evaluate(X).ravel()
+
+        # Zero locations must be preserved: where f(x) ≈ 0, simplify(f)(x) ≈ 0
+        # Use a reasonable absolute tolerance that distinguishes actual zeros
+        # from very small non-zero values (like 1e-100)
+        # We use both relative and absolute tolerance for robustness
+        original_zeros = np.isclose(original, 0, atol=1e-12, rtol=1e-12)
+        simplified_zeros = np.isclose(simplified, 0, atol=1e-12, rtol=1e-12)
+
+        # For early stopping: every original zero must also be a simplified zero
+        # (conservative property - extra zeros in simplified are OK)
+        # This ensures we never miss a zero that the original had
+        zeros_preserved = original_zeros & ~simplified_zeros
+        assert not zeros_preserved.any(), (
+            f"Simplification lost zeros at indices: {np.where(zeros_preserved)[0]}"
+        )
+
+    @given(tree=expression_trees(max_leaves=10))
+    @settings(max_examples=100, deadline=None)
+    def test_simplify_idempotent(self, tree):
+        """Property: simplify(simplify(f)) == simplify(f)"""
+        X = np.linspace(-5, 5, 30).reshape(-1, 1)
+
+        simplify_tree(tree, X)
+        once_simplified = tree.copy()
+
+        simplify_tree(tree, X)
+        twice_simplified = tree
+
+        assert len(once_simplified.nodes) == len(twice_simplified.nodes)
+        for n1, n2 in zip(once_simplified.nodes, twice_simplified.nodes):
+            assert n1.name == n2.name
