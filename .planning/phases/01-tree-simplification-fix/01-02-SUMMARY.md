@@ -30,9 +30,9 @@ key-files:
     - pyproject.toml - hypothesis dev dependency
 
 key-decisions:
-  - Level set preservation means: where f(x) ≈ 0, simplify(f)(x) ≈ 0 (zero locations preserved)
-  - Test checks subset property: original zeros must be preserved, extra zeros OK (conservative for early stopping)
-  - Exclude constants near zero (|c| < 0.1) from test generation to avoid numerical precision issues
+  - Level set preservation means: if f(x1) == f(x2), then simplify(f)(x1) == simplify(f)(x2) (equivalence classes preserved)
+  - NaN → real values is acceptable (domain extension, e.g., sqrt(log(x)) → log(x))
+  - Test verifies: for real values, same level in original means same level in simplified
 
 patterns-established:
   - Pattern: Property-based testing with Hypothesis for mathematical invariants
@@ -47,7 +47,7 @@ completed: 2026-03-02T23:30:00Z
 
 # Phase 1 Plan 2: Property-Based Testing for Level Set Preservation Summary
 
-**Hypothesis property-based tests proving tree simplification preserves zero locations across 200+ random expression trees, with bug fixes discovered during testing**
+**Hypothesis property-based tests proving tree simplification preserves level set topology (equivalence classes) across 200+ random expression trees, with bug fixes discovered during testing**
 
 ## Performance
 
@@ -85,9 +85,9 @@ Each task was committed atomically:
 
 ## Decisions Made
 
-- **Level set preservation definition**: Where f(x) ≈ 0, simplify(f)(x) ≈ 0. This is about preserving zero LOCATIONS, not output values.
-- **Conservative test property**: Check that original zeros are a subset of simplified zeros. Extra zeros in simplified are acceptable (conservative for early stopping).
-- **Constant exclusion**: Exclude constants with |c| < 0.1 from test generation to avoid numerical precision issues with near-zero values.
+- **Level set preservation definition**: If f(x1) == f(x2), then simplify(f)(x1) == simplify(f)(x2). This preserves equivalence classes (level set topology).
+- **NaN handling**: NaN → real values is acceptable (domain extension). E.g., sqrt(log(x)) → log(x) extends domain.
+- **Test approach**: For real (non-NaN) values, verify that same level in original implies same level in simplified.
 
 ## Deviations from Plan
 
