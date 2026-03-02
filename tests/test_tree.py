@@ -1,5 +1,7 @@
 import pytest
 import numpy as np
+import hypothesis.strategies as st
+from hypothesis import given, settings, assume
 
 from primel.tree import ExpressionTree, Node, simplify_tree
 
@@ -20,6 +22,68 @@ def pos_neg_data() -> np.ndarray:
 def periodic_data() -> np.ndarray:
     """Data within between (0, 2pi) not including endpoints."""
     return np.linspace(0.1, 2 * np.pi - 0.1, 10)
+
+
+# Hypothesis strategies for generating random expression trees
+def make_x_node():
+    return Node("x", lambda X: X, 0)
+
+
+def make_const_node(v):
+    return Node("const", v, 0)
+
+
+leaves = st.one_of(
+    [
+        st.builds(lambda: make_x_node()),
+        st.builds(
+            lambda v: make_const_node(v),
+            st.floats(
+                min_value=-10, max_value=10, allow_nan=False, allow_infinity=False
+            ),
+        ),
+    ]
+)
+
+unary_ops = st.sampled_from(
+    [
+        ("log", np.log),
+        ("sqrt", np.sqrt),
+        ("exp", np.exp),
+    ]
+)
+
+binary_ops = st.sampled_from(
+    [
+        ("add", np.add),
+        ("sub", np.subtract),
+        ("mul", np.multiply),
+        ("div", np.divide),
+    ]
+)
+
+
+@st.composite
+def expression_trees(draw, max_leaves=15):
+    def extend(base):
+        return st.one_of(
+            [
+                st.builds(
+                    lambda op, child: [Node(op[0], op[1], 1)] + child, unary_ops, base
+                ),
+                st.builds(
+                    lambda op, left, right: [Node(op[0], op[1], 2)] + left + right,
+                    binary_ops,
+                    base,
+                    base,
+                ),
+            ]
+        )
+
+    node_list = draw(
+        st.recursive(st.builds(lambda n: [n], leaves), extend, max_leaves=max_leaves)
+    )
+    return ExpressionTree.init_from_list(node_list)
 
 
 class TestExpressionTree:
