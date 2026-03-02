@@ -64,26 +64,30 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SIMP-01 | Phase 1 | Pending |
-| SIMP-02 | Phase 1 | Pending |
-| SIMP-03 | Phase 1 | Pending |
-| SIMP-04 | Phase 1 | Pending |
-| SIMP-05 | Phase 1 | Pending |
-| SIMP-06 | Phase 1 | Pending |
-| PHYS-01 | Phase 2 | Pending |
-| PHYS-02 | Phase 2 | Pending |
-| PHYS-03 | Phase 2 | Pending |
-| PHYS-04 | Phase 2 | Pending |
-| PHYS-05 | Phase 2 | Pending |
-| TEST-01 | Phase 1 | Pending |
-| TEST-02 | Phase 1 | Pending |
-| TEST-03 | Phase 2 | Pending |
-| TEST-04 | Phase 2 | Pending |
+| SIMP-01 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-02 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-03 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-04 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-05 | Phase 1: Tree Simplification Fix | Pending |
+| SIMP-06 | Phase 1: Tree Simplification Fix | Pending |
+| TEST-01 | Phase 1: Tree Simplification Fix | Pending |
+| TEST-02 | Phase 1: Tree Simplification Fix | Pending |
+| PHYS-01 | Phase 2: PhySO Adapter | Pending |
+| PHYS-02 | Phase 2: PhySO Adapter | Pending |
+| PHYS-03 | Phase 2: PhySO Adapter | Pending |
+| PHYS-04 | Phase 2: PhySO Adapter | Pending |
+| PHYS-05 | Phase 2: PhySO Adapter | Pending |
+| TEST-03 | Phase 2: PhySO Adapter | Pending |
+| TEST-04 | Phase 2: PhySO Adapter | Pending |
 
 **Coverage:**
 - v1 requirements: 15 total
 - Mapped to phases: 15
 - Unmapped: 0 ✓
+
+**Phase Summary:**
+- Phase 1 (Tree Simplification Fix): 8 requirements (SIMP-01 to SIMP-06, TEST-01, TEST-02)
+- Phase 2 (PhySO Adapter): 7 requirements (PHYS-01 to PHYS-05, TEST-03, TEST-04)
 
 ---
 *Requirements defined: 2026-03-02*
