@@ -42,11 +42,11 @@ Plans:
   2. ImportanceSampler samples pass through to PhySO training via `y_weights`
   3. Local validation script/notebook demonstrates end-to-end PhySO training with KL divergence fitness
   4. Unit tests verify reward computation matches expected behavior
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Implement PhySOAdapter with custom reward wrapper
-- [ ] 02-02: Add sampler integration and validation script
+- [ ] 02-01: PhySOAdapter with reward config and unit tests (PHYS-01, PHYS-02, PHYS-05, TEST-03)
+- [ ] 02-02: Experiment runner and validation script (PHYS-03, PHYS-04, TEST-04)
 
 ## Progress
 
