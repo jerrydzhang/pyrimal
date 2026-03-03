@@ -27,6 +27,10 @@ class PhySOExperiment(Experiment):
         data = np.loadtxt(data_path, delimiter=",")
         return data
 
+    def save_model(self: Self, result_path: Path, model: Any) -> None:
+        """Required by Experiment abstract base class."""
+        pass
+
     def train(self: Self, data: np.ndarray, config: dict) -> None:
         """Train PhySO model with multi-component sampling."""
         # Create distributions
@@ -138,4 +142,11 @@ class PhySOExperiment(Experiment):
 
 def get_experiment(config: dict) -> Experiment:
     """Factory function to create PhySO experiment."""
-    return PhySOExperiment(**config)
+    # Handle random_state passed either top-level or inside parameters
+    rs = config.get("random_state")
+    if rs is None and "parameters" in config:
+        rs = config["parameters"].get("random_state", 42)
+    elif rs is None:
+        rs = 42
+
+    return PhySOExperiment(random_state=rs, **config)
