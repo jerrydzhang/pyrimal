@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-02)
 ## Current Position
 
 Phase: 2 of 2 (PhySO Adapter)
-Plan: 1 of 3 in current phase
-Status: Plan 01 complete, continuing Phase 2
-Last activity: 2026-03-03 — Completed 02-01 PhySO adapter plan
+Plan: 3 of 3 complete
+Status: Phase 2 complete, all plans finished
+Last activity: 2026-03-03 — Completed 02-03 PhySO adapter gap closure
 
-Progress: [██████░░░░░] 66% (Phase 1 complete, 1/3 plans in Phase 2 complete)
+Progress: [████████░░░░] 80% (Phase 1 complete, Phase 2 complete)
 
 ## Performance Metrics
 
@@ -28,8 +28,8 @@ Progress: [██████░░░░░] 66% (Phase 1 complete, 1/3 plans i
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | Phase 01-tree-simplification-fix | 2 | 19 min | 9.5 min |
-| Phase 02-physo-adapter | 1 | 2 min | 2 min |
-| Phase 02-physo-adapter P02 | 12min | 3 tasks | 3 files |
+| Phase 02-physo-adapter | 3 | 15 min | 5 min |
+| Phase 02-physo-adapter P03 | 1 min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -49,6 +49,7 @@ Recent decisions affecting current work:
 - [Phase 02-physo-adapter]: Reward function validates len(y_pred) == len(sampler.samples) — Critical for catching sampler/expression mismatch bugs early
 - [Phase 02-physo-adapter]: Used zhong/f01/f01.csv as default data file (zhong/constant.csv does not exist) — Plan specified zhong/constant.csv but file does not exist in data directory. zhong/f01/f01.csv is small, suitable for testing, and used in other yaml files.
 - [Phase 02-physo-adapter]: Updated PhySOAdapter.get_learning_config() to return complete run_config with all required keys for PhySO.SR — PhySO.SR requires full run_config dict with reward_config, learning_config, priors_config, cell_config, and free_const_opti_args keys.
+- [Phase 02-physo-adapter]: Test must validate config['learning_config']['rewards_computer'] to match adapter.get_learning_config() structure from plan 02-02 — Adapter returns dict with nested learning_config containing rewards_computer key at config['learning_config']['rewards_computer']
 
 ### Pending Todos
 
@@ -61,5 +62,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-03
-Stopped at: Completed 02-01-PLAN.md (PhySOAdapter dataclass with reward config and unit tests)
+Stopped at: Completed 02-03-PLAN.md (Fixed test assertion to match adapter config structure)
 Resume file: None
