@@ -29,6 +29,7 @@ Progress: [██████░░░░░] 66% (Phase 1 complete, 1/3 plans i
 |-------|-------|-------|----------|
 | Phase 01-tree-simplification-fix | 2 | 19 min | 9.5 min |
 | Phase 02-physo-adapter | 1 | 2 min | 2 min |
+| Phase 02-physo-adapter P02 | 12min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -46,6 +47,8 @@ Recent decisions affecting current work:
 - [Phase 02-physo-adapter]: GECCO weights computed internally by induced_kl_divergence; sampler.weights NOT passed to PhySO — Avoids double-weighting since GECCO weights already capture importance via reference PDF
 - [Phase 02-physo-adapter]: No get_y_weights() method in PhySOAdapter — Would cause double-weighting with GECCO weights computed internally by induced_kl_divergence
 - [Phase 02-physo-adapter]: Reward function validates len(y_pred) == len(sampler.samples) — Critical for catching sampler/expression mismatch bugs early
+- [Phase 02-physo-adapter]: Used zhong/f01/f01.csv as default data file (zhong/constant.csv does not exist) — Plan specified zhong/constant.csv but file does not exist in data directory. zhong/f01/f01.csv is small, suitable for testing, and used in other yaml files.
+- [Phase 02-physo-adapter]: Updated PhySOAdapter.get_learning_config() to return complete run_config with all required keys for PhySO.SR — PhySO.SR requires full run_config dict with reward_config, learning_config, priors_config, cell_config, and free_const_opti_args keys.
 
 ### Pending Todos
 
