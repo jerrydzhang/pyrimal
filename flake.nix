@@ -30,12 +30,11 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               uv
-              nixgl.default
             ];
 
             shellHook = ''
               unset PYTHONPATH
-              uv sync
+              uv sync --all-extras
               . .venv/bin/activate
             '';
           };
@@ -48,7 +47,7 @@
 
             shellHook = ''
               unset PYTHONPATH
-              uv sync
+              uv sync --all-extras --link-mode=copy
               . .venv/bin/activate
             '';
           };
