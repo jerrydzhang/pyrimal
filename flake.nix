@@ -84,7 +84,6 @@
             shellHook = ''
               unset PYTHONPATH
               uv sync --inexact
-              uv pip install -e . -e "jernerics @ ./../jernerics"
               . .venv/bin/activate
             '';
           };
@@ -98,7 +97,6 @@
             shellHook = ''
               unset PYTHONPATH
               uv sync --inexact
-              uv pip install -e . -e "jernerics @ ./../jernerics"
               . .venv/bin/activate
             '';
           };

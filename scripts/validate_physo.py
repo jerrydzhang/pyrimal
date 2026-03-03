@@ -6,15 +6,12 @@ from pathlib import Path
 
 import numpy as np
 
-# Fail early if physo is not installed
 import physo
 
 from primel.adapters.physo import PhySOAdapter
 from primel.distributions import Empirical, GaussianKDE, MultivariateUniform
 from primel.samplers import ImportanceSampler, LHSampler, RandomSampler
 from primel.fitness import induced_kl_divergence
-
-import physo
 
 
 def main():
@@ -47,15 +44,15 @@ def main():
 
     # Setup distributions
     empirical_dist = Empirical(data=data)
-    gaussian_kde_dist = GaussianKDE(X=data, bandwidth=0.1)
+    gaussian_kde_dist = GaussianKDE(X=data, bandwidth=0.5)
     uniform_dist = MultivariateUniform(X=data, margins=0.1, non_negative=False)
 
     # Setup multi-component sampler
     sampler = ImportanceSampler(
         sampler_entries=[
             ("train", RandomSampler(empirical_dist), data.shape[0]),
-            ("kde", RandomSampler(gaussian_kde_dist), 100),
-            ("uniform", LHSampler(uniform_dist), 100),
+            ("kde", RandomSampler(gaussian_kde_dist), 200),
+            ("uniform", LHSampler(uniform_dist), 200),
         ],
         random_state=args.seed,
     )
@@ -65,32 +62,47 @@ def main():
         f"Samples: {data.shape[0]} train + 100 kde + 100 uniform = {len(sampler.samples)} total"
     )
 
-    # Create PhySO adapter
     adapter = PhySOAdapter(
         sampler=sampler,
         reference_distribution=gaussian_kde_dist,
-        lambda_=1.0,
+        lambda_=10.0,
         exponent=1.0,
         mean_center_on="train",
+        epochs=args.epochs,
     )
 
-    # Run PhySO symbolic regression
-    X = data.T
-    y = np.zeros(data.shape[0])
+    X = sampler.samples.T
+    y = np.zeros(len(sampler.samples))
     X_names = [f"x{i}" for i in range(data.shape[1])]
 
-    expression = physo.SR(
+    expression, _ = physo.SR(
         X=X,
         y=y,
         X_names=X_names,
-        op_names=["add", "sub", "mul", "div", "sqrt", "neg", "n2", "inv"],
+        op_names=[
+            "mul",
+            "add",
+            "sub",
+            "div",
+            "sqrt",
+            "n2",
+            "neg",
+            "inv",
+            "log",
+            "exp",
+            "sin",
+            "cos",
+        ],
         run_config=adapter.get_learning_config(),
         stop_after_n_epochs=args.epochs,
         parallel_mode=False,
     )
 
-    # Compute KL divergence
-    f_vals = expression(sampler.samples)
+    import torch
+
+    # Compute KL divergence on the final expression
+    X_torch = torch.tensor(sampler.samples.T, dtype=torch.float32)
+    f_vals = expression(X_torch).detach().cpu().numpy()
     kl_divergence = induced_kl_divergence(
         f_vals,
         sampler,
@@ -98,7 +110,6 @@ def main():
         mean_center_on="train",
     )
 
-    # Print results
     print(f"Expression: {expression}")
     print(f"KL score: {kl_divergence:.4f}")
 

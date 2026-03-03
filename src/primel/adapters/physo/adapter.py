@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 import torch
@@ -24,6 +24,7 @@ class PhySOAdapter:
     lambda_: float = 1.0
     exponent: float = 1.0
     mean_center_on: str | list[str] | None = None
+    epochs: int = 100
 
     def get_reward_config(self) -> dict:
         def kl_reward(y_target, y_pred, y_weights=1.0):
@@ -59,18 +60,12 @@ class PhySOAdapter:
 
         return {
             "reward_function": kl_reward,
-            "zero_out_unphysical": True,
+            "zero_out_unphysical": False,
             "zero_out_duplicates": False,
         }
 
     def get_learning_config(self) -> dict:
-        """Return run_config for PhySO.SR.
-
-        Returns a dict with reward_config, learning_config, priors_config,
-        cell_config, and free_const_opti_args keys.
-        """
-        import torch
-
+        """Return run_config for PhySO.SR."""
         return {
             "reward_config": self.get_reward_config(),
             "learning_config": {
@@ -79,17 +74,49 @@ class PhySOAdapter:
                 ),
                 "batch_size": 1000,
                 "max_time_step": 35,
-                "n_epochs": 1000000000,
+                "n_epochs": self.epochs,
                 "gamma_decay": 0.7,
                 "entropy_weight": 0.005,
                 "risk_factor": 0.05,
                 "get_optimizer": lambda model: torch.optim.Adam(
                     model.parameters(), lr=0.0025
                 ),
-                "observe_units": False,
+                "observe_units": True,
             },
             "priors_config": [
                 ("HardLengthPrior", {"max_length": 35, "min_length": 4}),
+                (
+                    "SoftLengthPrior",
+                    {
+                        "length_loc": 15,
+                        "scale": 10,
+                    },
+                ),
+                # RELATIONSHIPS RELATED
+                ("NoUselessInversePrior", None),
+                (
+                    "PhysicalUnitsPrior",
+                    {"prob_eps": np.finfo(np.float32).eps},
+                ),  # PHYSICALITY
+                (
+                    "NestedFunctions",
+                    {
+                        "functions": [
+                            "exp",
+                        ],
+                        "max_nesting": 1,
+                    },
+                ),
+                (
+                    "NestedFunctions",
+                    {
+                        "functions": [
+                            "log",
+                        ],
+                        "max_nesting": 1,
+                    },
+                ),
+                ("NestedTrigonometryPrior", {"max_nesting": 1}),
             ],
             "cell_config": {
                 "hidden_size": 128,

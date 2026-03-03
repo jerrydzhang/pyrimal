@@ -101,7 +101,7 @@ def induced_kl_divergence(
     #
     # Alternative (matches paper description "w(z) = μ(z)q̃_g(z)"):
     #   combined_weights = sampler.weights * gecco_weights
-    # This combines balance heuristic (Veach) with GECCO weights, which is 
+    # This combines balance heuristic (Veach) with GECCO weights, which is
     # theoretically superior for variance reduction but not what Julia does.
     combined_weights = gecco_weights
 

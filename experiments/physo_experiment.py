@@ -32,7 +32,7 @@ class PhySOExperiment(Experiment):
         # Create distributions
         empirical_dist = Empirical(data=data)
         gaussian_kde_dist = GaussianKDE(
-            X=data, bandwidth=config["model__kde_bandwidth"]
+            X=data, bandwidth=config.get("model__kde_bandwidth", 0.5)
         )
         uniform_dist = MultivariateUniform(X=data, margins=0.1, non_negative=False)
 
@@ -47,12 +47,12 @@ class PhySOExperiment(Experiment):
                 (
                     "kde",
                     RandomSampler(gaussian_kde_dist),
-                    config.get("model__n_kde", 100),
+                    config.get("model__n_kde", 200),
                 ),  # Local exploration
                 (
                     "uniform",
                     LHSampler(uniform_dist),
-                    config.get("model__n_uniform", 100),
+                    config.get("model__n_uniform", 200),
                 ),  # Global exploration
             ],
             random_state=self.random_state,
@@ -62,28 +62,31 @@ class PhySOExperiment(Experiment):
         adapter = PhySOAdapter(
             sampler=sampler,
             reference_distribution=gaussian_kde_dist,
-            lambda_=config.get("lambda_", 1.0),
+            lambda_=config.get("lambda_", 10.0),
             exponent=config.get("exponent", 1.0),
             mean_center_on="train",
+            epochs=config.get("epochs", 1000),
         )
 
         # Run PhySO for each trial
-        for trial_idx in range(config["n_trials"]):
+        for trial_idx in range(config.get("n_trials", 1)):
             # PhySO expects X with shape (n_dim, n_samples)
-            X = data.T
-            y = np.zeros(data.shape[0])
+            X = sampler.samples.T
+            y = np.zeros(len(sampler.samples))
 
             # Generate X_names from config or auto-generate
             X_names = config.get("X_names", [f"x{i}" for i in range(data.shape[1])])
 
             # Run PhySO symbolic regression
-            expression = physo.SR(
+            expression, _ = physo.SR(
                 X=X,
                 y=y,
                 X_names=X_names,
-                op_names=["add", "sub", "mul", "div", "sqrt", "neg", "n2", "inv"],
+                op_names=config.get("op_names", [
+                    "mul", "add", "sub", "div", "sqrt", "n2", "neg", "inv", "log", "exp", "sin", "cos"
+                ]),
                 run_config=adapter.get_learning_config(),
-                stop_after_n_epochs=config.get("epochs", 100),
+                stop_after_n_epochs=config.get("epochs", 1000),
                 parallel_mode=False,
             )
 
@@ -97,10 +100,11 @@ class PhySOExperiment(Experiment):
         self: Self, expression, sampler: ImportanceSampler, ref_dist: GaussianKDE
     ) -> dict:
         """Compute KL divergence for discovered expression."""
+        import torch
         # Evaluate expression on sampler samples
-        samples = sampler.samples
+        X_torch = torch.tensor(sampler.samples.T, dtype=torch.float32)
         # PhySO expressions are callable
-        f_vals = expression(samples)
+        f_vals = expression(X_torch).detach().cpu().numpy()
 
         # Compute KL divergence
         kl_divergence = induced_kl_divergence(

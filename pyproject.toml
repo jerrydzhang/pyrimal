@@ -19,6 +19,7 @@ gplearn = ["gplearn>=0.4.2"]
 
 physo = [
 	"physo>=1.1.11",
+	"psutil>=7.2.2",
 ]
 
 adapters = [

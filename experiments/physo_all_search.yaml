@@ -1,0 +1,1676 @@
+name: physo_zhong_all
+description: PhySO large scale trial and hyperparameter search on all 23 Zhong equations
+shared:
+  module: experiments.physo_experiment
+  parameters:
+    n_trials: 1
+    epochs: 2000
+    lambda_: 10.0
+    exponent: 1.0
+    op_names:
+    - mul
+    - add
+    - sub
+    - div
+    - n2
+    - neg
+    - log
+    - sin
+    - cos
+experiments:
+- parameters:
+    random_state: 670488
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 116740
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 26226
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 777573
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 288390
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 256788
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 234054
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 146317
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 772247
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 107474
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 709571
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 776647
+    data_file: zhong/f01/f01.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 935519
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 571859
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 91162
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 619177
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 442418
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 33327
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 31245
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 98247
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 229259
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 243963
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 529904
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 631263
+    data_file: zhong/f02/f02.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 27825
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 588509
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 208497
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 750801
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 681454
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 735393
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 571413
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 439899
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 231149
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 471030
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 617890
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 291705
+    data_file: zhong/f03/f03.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 848750
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 911528
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 6815
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 795668
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 844963
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 167415
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 732053
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 443144
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 356779
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 291370
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 163033
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 225773
+    data_file: zhong/f04/f04.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 800582
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 352945
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 107176
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 97252
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 398383
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 101415
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 376418
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 888663
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 360664
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 633053
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 277371
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 846336
+    data_file: zhong/f05/f05.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 45562
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 765180
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 481742
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 562276
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 130890
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 967097
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 396923
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 82628
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 578857
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 307420
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 869694
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 659177
+    data_file: zhong/f06/f06.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 648565
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 928464
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 903566
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 379202
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 605398
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 201630
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 738798
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 72934
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 48051
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 693385
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 238969
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 810621
+    data_file: zhong/f07/f07.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 303446
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 83668
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 896866
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 244099
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 908574
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 105908
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 398592
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 291477
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 475436
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 666564
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 874629
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 382555
+    data_file: zhong/f08/f08.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 170556
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 388163
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 372529
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 219685
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 702730
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 279947
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 735912
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 982154
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 716752
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 679515
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 74871
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 638721
+    data_file: zhong/f09/f09.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 665823
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 179452
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 560087
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 764545
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 256703
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 171340
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 484715
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 397888
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 283061
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 970343
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 671089
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 721591
+    data_file: zhong/f10/f10.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 584005
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 230284
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 717871
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 340036
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 883795
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 805636
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 813695
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 58656
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 240175
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 861723
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 33660
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 844152
+    data_file: zhong/f11/f11.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 330777
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 420652
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 280747
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 69404
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 221232
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 957493
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 988713
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 594732
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 918939
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 752788
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 329964
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 222956
+    data_file: zhong/f12/f12.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 687278
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 523482
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 414851
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 927658
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 958973
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 674080
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 481142
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 149812
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 277747
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 146414
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 258608
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 781178
+    data_file: zhong/f13/f13.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 588638
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 565159
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 275505
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 783301
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 612983
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 449246
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 941436
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 611879
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 418802
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 379581
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 229975
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 145052
+    data_file: zhong/f14/f14.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 534278
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 517489
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 95326
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 792496
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 49406
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 902932
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 114976
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 160266
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 657925
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 167754
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 830556
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 713537
+    data_file: zhong/f15/f15.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 442667
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 625381
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 66614
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 403458
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 400157
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 624835
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 490786
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 554817
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 263627
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 580100
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 902593
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 988211
+    data_file: zhong/f16/f16.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 12039
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 713329
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 755732
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 120117
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 714826
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 927768
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 563055
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 787353
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 279787
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 805935
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 672098
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 356700
+    data_file: zhong/f17/f17.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 116971
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 307758
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 455885
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 165841
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 475764
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 3403
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 757169
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 918399
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 754640
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 276184
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 524903
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 798976
+    data_file: zhong/f18/f18.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 187331
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 532343
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 956960
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 111580
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 912805
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 655675
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 312943
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 882555
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 669988
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 532324
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 638552
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 208574
+    data_file: zhong/f19/f19.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 160264
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 392078
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 799551
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 169397
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 565580
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 999817
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 816450
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 967243
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 556117
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 963111
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 600
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 628039
+    data_file: zhong/f20/f20.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 339903
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 512341
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 20423
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 117302
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 974231
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 380613
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 921407
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 872065
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 845965
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 322452
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 251084
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 60739
+    data_file: zhong/f21/f21.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 252573
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 920660
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 594917
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 992949
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 82583
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 89815
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 767461
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 509598
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 855663
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 72575
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 797550
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 558583
+    data_file: zhong/f22/f22.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 803036
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 131870
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 134629
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 691799
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.05
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 498370
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 992843
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 576511
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 173149
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.1
+    model__n_kde: 20
+    model__n_uniform: 20
+- parameters:
+    random_state: 277933
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 5
+- parameters:
+    random_state: 553307
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 5
+    model__n_uniform: 20
+- parameters:
+    random_state: 914813
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 5
+- parameters:
+    random_state: 636060
+    data_file: zhong/f23/f23.csv
+    model__kde_bandwidth: 0.5
+    model__n_kde: 20
+    model__n_uniform: 20
