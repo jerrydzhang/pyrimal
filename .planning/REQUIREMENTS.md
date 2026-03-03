@@ -16,17 +16,17 @@
 
 ### PhySO Adapter
 
-- [ ] **PHYS-01**: PhySOAdapter class following gplearn adapter pattern
-- [ ] **PHYS-02**: Wrap `induced_kl_divergence` as PhySO reward via `make_RewardsComputer()`
+- [x] **PHYS-01**: PhySOAdapter class following gplearn adapter pattern
+- [x] **PHYS-02**: Wrap `induced_kl_divergence` as PhySO reward via `make_RewardsComputer()`
 - [ ] **PHYS-03**: Basic PhySO experiment runner
 - [ ] **PHYS-04**: Local test script or marimo notebook for PhySO adapter validation
-- [ ] **PHYS-05**: Sampler integration — pass ImportanceSampler samples to PhySO
+- [x] **PHYS-05**: Sampler integration — pass ImportanceSampler samples to PhySO
 
 ### Testing
 
 - [x] **TEST-01**: Unit tests for position-aware constant removal
 - [x] **TEST-02**: Unit tests for position-aware monotonic removal
-- [ ] **TEST-03**: Unit tests for PhySO adapter fitness computation
+- [x] **TEST-03**: Unit tests for PhySO adapter fitness computation
 - [ ] **TEST-04**: Local validation script in place of full integration tests
 
 ## v2 Requirements
@@ -72,12 +72,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SIMP-06 | Phase 1: Tree Simplification Fix | Complete |
 | TEST-01 | Phase 1: Tree Simplification Fix | Complete |
 | TEST-02 | Phase 1: Tree Simplification Fix | Complete |
-| PHYS-01 | Phase 2: PhySO Adapter | Pending |
-| PHYS-02 | Phase 2: PhySO Adapter | Pending |
+| PHYS-01 | Phase 2: PhySO Adapter | Complete |
+| PHYS-02 | Phase 2: PhySO Adapter | Complete |
 | PHYS-03 | Phase 2: PhySO Adapter | Pending |
 | PHYS-04 | Phase 2: PhySO Adapter | Pending |
-| PHYS-05 | Phase 2: PhySO Adapter | Pending |
-| TEST-03 | Phase 2: PhySO Adapter | Pending |
+| PHYS-05 | Phase 2: PhySO Adapter | Complete |
+| TEST-03 | Phase 2: PhySO Adapter | Complete |
 | TEST-04 | Phase 2: PhySO Adapter | Pending |
 
 **Coverage:**
