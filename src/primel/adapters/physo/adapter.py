@@ -64,8 +64,48 @@ class PhySOAdapter:
         }
 
     def get_learning_config(self) -> dict:
+        """Return run_config for PhySO.SR.
+
+        Returns a dict with reward_config, learning_config, priors_config,
+        cell_config, and free_const_opti_args keys.
+        """
+        import torch
+
         return {
-            "rewards_computer": reward_module.make_RewardsComputer(
-                **self.get_reward_config()
-            ),
+            "reward_config": self.get_reward_config(),
+            "learning_config": {
+                "rewards_computer": reward_module.make_RewardsComputer(
+                    **self.get_reward_config()
+                ),
+                "batch_size": 1000,
+                "max_time_step": 35,
+                "n_epochs": 1000000000,
+                "gamma_decay": 0.7,
+                "entropy_weight": 0.005,
+                "risk_factor": 0.05,
+                "get_optimizer": lambda model: torch.optim.Adam(
+                    model.parameters(), lr=0.0025
+                ),
+                "observe_units": False,
+            },
+            "priors_config": [
+                ("HardLengthPrior", {"max_length": 35, "min_length": 4}),
+            ],
+            "cell_config": {
+                "hidden_size": 128,
+                "is_lobotomized": False,
+                "n_layers": 1,
+            },
+            "free_const_opti_args": {
+                "loss": "MSE",
+                "method": "LBFGS",
+                "method_args": {
+                    "lbfgs_func_args": {
+                        "line_search_fn": "strong_wolfe",
+                        "max_iter": 4,
+                    },
+                    "n_steps": 15,
+                    "tol": 1e-08,
+                },
+            },
         }
