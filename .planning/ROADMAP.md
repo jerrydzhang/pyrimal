@@ -13,7 +13,7 @@ This roadmap delivers correct tree simplification (preserving level set topology
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Tree Simplification Fix** - Position-aware simplification preserving level set topology (completed 2026-03-02)
-- [ ] **Phase 2: PhySO Adapter** - PhySO integration with induced KL divergence reward
+ - [x] **Phase 2: PhySO Adapter** - PhySO integration with induced KL divergence reward (completed 2026-03-03)
 
 ## Phase Details
 
@@ -47,7 +47,7 @@ Plans:
 Plans:
 - [x] 02-01: PhySOAdapter with reward config and unit tests (PHYS-01, PHYS-02, PHYS-05, TEST-03)
 - [x] 02-02: Experiment runner and validation script (PHYS-03, PHYS-04, TEST-04)
-- [ ] 02-03: Fix test assertion for learning config structure (TEST-03, gap closure)
+- [x] 02-03: Fix test assertion for learning config structure (TEST-03, gap closure)
 
 ## Progress
 
@@ -57,7 +57,7 @@ Phases execute in numeric order: 1 → 2
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Tree Simplification Fix | 2/2 | Complete | 2026-03-02 |
-| 2. PhySO Adapter | 2/3 | In progress (gap closure) | 2026-03-03 |
+| 2. PhySO Adapter | 3/3 | Complete | 2026-03-03 |
 
 ---
 *Roadmap created: 2026-03-02*
