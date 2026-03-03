@@ -42,11 +42,12 @@ Plans:
   2. ImportanceSampler samples pass through to PhySO training via `y_weights`
   3. Local validation script/notebook demonstrates end-to-end PhySO training with KL divergence fitness
   4. Unit tests verify reward computation matches expected behavior
-**Plans**: 2 plans
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: PhySOAdapter with reward config and unit tests (PHYS-01, PHYS-02, PHYS-05, TEST-03)
-- [ ] 02-02: Experiment runner and validation script (PHYS-03, PHYS-04, TEST-04)
+- [x] 02-01: PhySOAdapter with reward config and unit tests (PHYS-01, PHYS-02, PHYS-05, TEST-03)
+- [x] 02-02: Experiment runner and validation script (PHYS-03, PHYS-04, TEST-04)
+- [ ] 02-03: Fix test assertion for learning config structure (TEST-03, gap closure)
 
 ## Progress
 
@@ -56,7 +57,7 @@ Phases execute in numeric order: 1 → 2
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Tree Simplification Fix | 2/2 | Complete | 2026-03-02 |
-| 2. PhySO Adapter | 0/2 | Not started | - |
+| 2. PhySO Adapter | 2/3 | In progress (gap closure) | 2026-03-03 |
 
 ---
 *Roadmap created: 2026-03-02*
