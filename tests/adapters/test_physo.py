@@ -60,7 +60,10 @@ def test_physo_adapter_learning_config(sampler, reference_dist):
     adapter = PhySOAdapter(sampler=sampler, reference_distribution=reference_dist)
     config = adapter.get_learning_config()
 
-    assert "rewards_computer" in config
+    assert "learning_config" in config  # ✓ Verify top-level key exists
+    assert (
+        "rewards_computer" in config["learning_config"]
+    )  # ✓ Check correct nested level
 
 
 def test_physo_adapter_reward_with_torch_tensor(sampler, reference_dist):
